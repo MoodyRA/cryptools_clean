@@ -11,8 +11,7 @@ class HomeController extends Controller
 {
     public function index(Request $request, Response $response, $args)
     {
-        $response->getBody()->write('<a href="/hello/world">Try /hello/world</a>');
-        return $response;
+        return $this->view->render($response, 'home.twig');
     }
 
     public function hello(Request $request, Response $response, $args)

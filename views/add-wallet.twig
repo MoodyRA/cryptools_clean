@@ -1,0 +1,16 @@
+{% extends 'layout.twig' %}
+
+{% block title "Wallets" %}
+
+{% block body %}
+
+    <h1>Ajouter un nouveau portefeuille</h1>
+    <form method="post">
+        <input type="text" name="name">
+        <select name="type">
+            <option value="manual">Manuelle</option>
+            <option value="binance">Binance API</option>
+        </select>
+        <button type="submit">Valider</button>
+    </form>
+{% endblock %}

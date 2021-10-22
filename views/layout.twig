@@ -1,0 +1,52 @@
+<!Doctype HTML>
+<html lang="fr">
+<head>
+    <title>
+        {% block title "Cryptools" %}
+    </title>
+    <link href="/assets/libraries/bootstrap-5.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/cryptools.min.css" rel="stylesheet">
+
+    {% block styles %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
+</head>
+
+<body>
+<div class="main-wrapper row">
+
+    <nav class="main-menu col-3 d-flex flex-column flex-shrink-0 p-3 text-white">
+        <a href="{{ router.generate('home') }}"
+           class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none justify-content-center">
+            <span class="fs-4">Cryptools</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/">
+                    <i class="bi bi-house"></i>
+                    Accueil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="/wallets">
+                    <i class="bi bi-house"></i>
+                    Wallets
+                </a>
+            </li>
+{#            {{ main_menu() }}#}
+        </ul>
+        <hr>
+    </nav>
+
+
+    <div class="col-9 content-wrapper">
+        {% block body %}
+        {% endblock %}
+    </div>
+</div>
+
+</body>
+</html>
