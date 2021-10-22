@@ -5,7 +5,7 @@
 {% block body %}
 
     <h1>Ajouter un nouveau portefeuille</h1>
-    <form method="post">
+    <form action="{{ url_for('wallets.create') }}" method="post">
         <input type="text" name="name">
         <select name="type">
             <option value="manual">Manuelle</option>
