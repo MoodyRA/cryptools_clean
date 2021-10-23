@@ -3,6 +3,17 @@
 {% block title "Wallets" %}
 
 {% block body %}
-
+    <table>
+        <tr>
+            <td>Nom</td>
+            <td>Type</td>
+        </tr>
+        {% for wallet in wallets %}
+            <tr>
+                <td>{{ wallet.name }}</td>
+                <td>{{ wallet.type }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <a href="{{ url_for('wallets.create_form') }}"> Ajouter un nouveau Portefeuille </a>
 {% endblock %}
