@@ -18,9 +18,18 @@ class Wallet
      */
     private $name;
     /**
-     * @var string
+     * @var int
      */
     private $type;
+
+    /**
+     * Cast en int dans le cas ou la classe est instanciée via PDO::fetchObject() qui ne renvoie que des string
+     */
+    public function __construct()
+    {
+        $this->id = (int)$this->id;
+        $this->type = (int)$this->type;
+    }
 
     /**
      * @return int
@@ -59,18 +68,18 @@ class Wallet
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getType(): string
+    public function getType(): int
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
+     * @param int $type
      * @return Wallet
      */
-    public function setType(string $type): Wallet
+    public function setType(int $type): Wallet
     {
         $this->type = $type;
         return $this;

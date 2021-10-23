@@ -7,7 +7,6 @@ namespace Cryptools\Infrastructure\Controller;
 use Cryptools\Domain\Wallet\UseCase\ShowAllWallets\ShowAllWallets;
 use Cryptools\Infrastructure\View\Wallet\ShowAllWalletsView;
 use Cryptools\Presentation\Wallet\ShowAllWalletHtmlPresenter;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -24,6 +23,9 @@ class WalletController
      * @var ShowAllWalletHtmlPresenter
      */
     private $showAllWalletsPresenter;
+    /**
+     * @var ShowAllWalletsView
+     */
     private $showAllWalletsView;
 
     public function __construct(
