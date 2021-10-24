@@ -12,7 +12,10 @@ class PDOWalletRepository extends PDORepository implements WalletRepository
 {
     public function find(int $walletId): ?Wallet
     {
-        // TODO: Implement find() method.
+        $query = "SELECT * FROM wallet WHERE id=?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$walletId]);
+        return $statement->fetchObject(Wallet::class);
     }
 
     public function findAll(): array
@@ -30,6 +33,8 @@ class PDOWalletRepository extends PDORepository implements WalletRepository
 
     public function delete(int $walletId): void
     {
-        // TODO: Implement delete() method.
+        $query = "DELETE FROM wallet WHERE id=?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$walletId]);
     }
 }

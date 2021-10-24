@@ -12,4 +12,12 @@ class ShowAllWalletsHtmlViewModel
      * @var WalletViewModel[]
      */
     public $wallets;
+    /**
+     * @var bool
+     */
+    public $displayDeleteModal = false;
+    /**
+     * @var string
+     */
+    public $deleteModalMessage = "";
 }
