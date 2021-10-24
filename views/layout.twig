@@ -4,8 +4,7 @@
     <title>
         {% block title "Cryptools" %}
     </title>
-    <link href="/assets/libraries/bootstrap-5.0.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/css/cryptools.min.css" rel="stylesheet">
+    <link href="assets/libraries/bootstrap-5.0.1/css/bootstrap.min.css" rel="stylesheet">
 
     {% block styles %}
     {% endblock %}
@@ -17,7 +16,7 @@
 <body>
 <div class="main-wrapper row">
 
-    <nav class="main-menu col-3 d-flex flex-column flex-shrink-0 p-3 text-white">
+    <nav>
         <a href="{{ router.generate('home') }}"
            class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none justify-content-center">
             <span class="fs-4">Cryptools</span>
@@ -25,13 +24,13 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ url_for('home') }}">
+                <a class="nav-link" href="{{ url_for('home') }}">
                     <i class="bi bi-house"></i>
                     Accueil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ url_for('wallets.show_all') }}">
+                <a class="nav-link" href="{{ url_for('wallets.show_all') }}">
                     <i class="bi bi-house"></i>
                     Wallets
                 </a>
@@ -42,7 +41,7 @@
     </nav>
 
 
-    <div class="col-9 content-wrapper">
+    <div class="content-wrapper">
         {% block body %}
         {% endblock %}
     </div>
