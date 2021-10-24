@@ -10,7 +10,7 @@ class WalletActions {
     }
 
     initOnClickEvents() {
-        var self = this;
+        let self = this;
         document.addEventListener('click', function (event) {
             if (event.target.matches('.delete-wallet')) {
                 // Don't follow the link
@@ -18,8 +18,6 @@ class WalletActions {
                 let route = event.target.dataset.route;
                 self.deleteWallet(route);
             }
-            console.log(event.target);
-
         }, false);
     }
 
