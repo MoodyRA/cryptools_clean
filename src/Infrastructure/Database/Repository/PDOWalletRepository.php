@@ -35,6 +35,6 @@ class PDOWalletRepository extends PDORepository implements WalletRepository
     {
         $query = "DELETE FROM wallet WHERE id=?";
         $statement = $this->pdo->prepare($query);
-        $statement->execute([$walletId]);
+       // $statement->execute([$walletId]);
     }
 }

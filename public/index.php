@@ -14,7 +14,8 @@ try {
     $container = $containerBuilder->build();
 
     // Instantiate App
-    $app = AppFactory::createFromContainer($container);
+    //$app = AppFactory::createFromContainer($container);
+    $app = \DI\Bridge\Slim\Bridge::create($container);
 
     // Add Twig-View Middleware
     $app->add(TwigMiddleware::createFromContainer($app));
@@ -26,11 +27,11 @@ try {
     $routes = $container->get('routes');
     foreach ($routes as $route) {
         if (
-            isset($route['method'])
+            isset($route['methods'])
             && isset($route['pattern'])
             && isset($route['callable'])
         ) {
-            $mappedRoute = $app->map([$route['method']], $route['pattern'], $route['callable']);
+            $mappedRoute = $app->map($route['methods'], $route['pattern'], $route['callable']);
             if (isset($route['name']) && is_string($route['name'])) {
                 $mappedRoute->setName($route['name']);
             }

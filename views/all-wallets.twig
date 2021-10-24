@@ -23,7 +23,7 @@
                 <td>{{ wallet.id }}</td>
                 <td>{{ wallet.name }}</td>
                 <td>{{ wallet.type }}</td>
-                <td><a data-route="{{ url_for('wallets.delete', { 'id': wallet.id }) }}" href="#"
+                <td><a href="{{ url_for('wallets.delete', { 'id': wallet.id }) }}"
                        class="delete-wallet text-danger">Supprimer</a>
                 </td>
             </tr>

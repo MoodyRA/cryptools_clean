@@ -28,4 +28,4 @@ class WalletActions {
     }
 }
 
-walletActions = new WalletActions();
+//walletActions = new WalletActions();

@@ -12,7 +12,6 @@ use Cryptools\Infrastructure\Database\DatabaseFactory;
 use Cryptools\Infrastructure\Database\Repository\PDOWalletRepository;
 use Cryptools\Infrastructure\Database\Repository\PDOWalletTypeRepository;
 use Cryptools\Infrastructure\TwigFactory;
-use Slim\Views\Twig;
 
 // dépendances pour le container
 return [
@@ -21,7 +20,6 @@ return [
     'db' => DI\factory(DatabaseFactory::class),
     'view' => DI\factory(TwigFactory::class),
     'views.paths' => ['main' => __DIR__ . '/../views'],
-
     // class
     WalletRepository::class => DI\autowire(PDOWalletRepository::class),
     WalletTypeRepository::class => DI\autowire(PDOWalletTypeRepository::class)

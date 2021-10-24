@@ -6,12 +6,14 @@ namespace Cryptools\Infrastructure\Controller\Wallet;
 
 use Cryptools\Domain\Wallet\UseCase\DeleteWallet\DeleteWallet;
 use Cryptools\Domain\Wallet\UseCase\DeleteWallet\DeleteWalletRequest;
+use Cryptools\Infrastructure\Controller\Controller;
 use Cryptools\Infrastructure\View\Wallet\DeleteWalletView;
 use Cryptools\Presentation\Wallet\DeleteWalletHtmlPresenter;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\App;
 
-class DeleteWalletController
+class DeleteWalletController extends Controller
 {
     /**
      * @var DeleteWallet
@@ -30,32 +32,40 @@ class DeleteWalletController
      */
     private $deleteWalletView;
 
-    public function __construct(
+    /**
+     * @param Request                   $request
+     * @param Response                  $response
+     * @param App                       $app
+     * @param DeleteWallet              $deleteWallet
+     * @param DeleteWalletHtmlPresenter $deleteWalletPresenter
+     * @param DeleteWalletRequest       $deleteWalletRequest
+     * @param DeleteWalletView          $deleteWalletView
+     * @param                           $id
+     * @return Response
+     */
+    public function __invoke(
+        Request $request,
+        Response $response,
+        // dependencies
+        App $app,
         DeleteWallet $deleteWallet,
         DeleteWalletHtmlPresenter $deleteWalletPresenter,
         DeleteWalletRequest $deleteWalletRequest,
-        DeleteWalletView $deleteWalletView
-    ) {
-        $this->deleteWallet = $deleteWallet;
-        $this->deleteWalletPresenter = $deleteWalletPresenter;
-        $this->deleteWalletRequest = $deleteWalletRequest;
-        $this->deleteWalletView = $deleteWalletView;
-        echo 'foo';
-    }
-
-    /**
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     * @return Response
-     */
-    public function __invoke(Request $request, Response $response, array $args): Response
-    {
-        $this->deleteWallet->execute(
-            $this->deleteWalletRequest->setWalletId((int)$args['id']),
-            $this->deleteWalletPresenter
+        DeleteWalletView $deleteWalletView,
+        // arguments
+        $id
+    ): Response {
+        $deleteWallet->execute(
+            $deleteWalletRequest->setWalletId((int)$id),
+            $deleteWalletPresenter
         );
-        //return $response->withRedirect('/');
-        return $this->deleteWalletView->generateView($response, $this->deleteWalletPresenter->viewModel());
+        return $response->withRedirect(
+            $app->getRouteCollector()->getRouteParser()->urlFor(
+                'wallets.show_all',
+                ['prout' => 'fooo'],
+                ['prout' => 'fooo']
+            )
+        );
+        // return $this->deleteWalletView->generateView($response, $this->deleteWalletPresenter->viewModel());
     }
 }

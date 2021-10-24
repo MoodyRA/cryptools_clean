@@ -42,6 +42,7 @@ class ShowAllWalletsController
      */
     public function __invoke(Request $request, Response $response): Response
     {
+        $queryParams = $request->getQueryParams();
         $this->showAllWallets->execute($this->showAllWalletsPresenter);
         return $this->showAllWalletsView->generateView($response, $this->showAllWalletsPresenter->viewModel());
     }

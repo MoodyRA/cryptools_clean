@@ -16,7 +16,7 @@ $routes = [];
 
 // Home routes
 $routes[] = [
-    'method' => 'GET',
+    'methods' => ['GET'],
     'pattern' => '/',
     'callable' => HomeController::class,
     'name' => 'home'
@@ -24,37 +24,37 @@ $routes[] = [
 
 // Wallet routes
 $routes[] = [
-    'method' => 'GET',
+    'methods' => ['GET'],
     'pattern' => '/wallets',
     'callable' => ShowAllWalletsController::class,
     'name' => 'wallets.show_all'
 ];
 $routes[] = [
-    'method' => 'GET',
+    'methods' => ['GET'],
     'pattern' => '/wallets/add',
     'callable' => ShowCreateFormWalletController::class,
     'name' => 'wallets.create_form'
 ];
 $routes[] = [
-    'method' => 'GET',
+    'methods' => ['GET'],
     'pattern' => '/wallets/{id}',
     'callable' => ShowWalletController::class,
     'name' => 'wallet.show'
 ];
 $routes[] = [
-    'method' => 'POST',
+    'methods' => ['POST'],
     'pattern' => '/wallets/add',
     'callable' => CreateWalletController::class,
     'name' => 'wallets.create'
 ];
 $routes[] = [
-    'method' => 'PATCH',
+    'methods' => ['PATCH'],
     'pattern' => '/wallets/update/{id}',
     'callable' => UpdateWalletController::class,
     'name' => 'wallets.update'
 ];
 $routes[] = [
-    'method' => 'DELETE',
+    'methods' => ['GET'],
     'pattern' => '/wallets/delete/{id}',
     'callable' => DeleteWalletController::class,
     'name' => 'wallets.delete'
