@@ -2,8 +2,15 @@
 
 declare(strict_types = 1);
 
-use Cryptools\Infrastructure\Controller\HomeController;
-use Cryptools\Infrastructure\Controller\WalletController;
+use Cryptools\Infrastructure\Controller\{
+    HomeController,
+    Wallet\CreateWalletController,
+    Wallet\DeleteWalletController,
+    Wallet\ShowAllWalletsController,
+    Wallet\ShowCreateFormWalletController,
+    Wallet\ShowWalletController,
+    Wallet\UpdateWalletController
+};
 
 $routes = [];
 
@@ -11,7 +18,7 @@ $routes = [];
 $routes[] = [
     'method' => 'GET',
     'pattern' => '/',
-    'callable' => [\DI\get(HomeController::class), 'index'],
+    'callable' => HomeController::class,
     'name' => 'home'
 ];
 
@@ -19,31 +26,36 @@ $routes[] = [
 $routes[] = [
     'method' => 'GET',
     'pattern' => '/wallets',
-    'callable' => [\DI\get(WalletController::class), 'showAll'],
+    'callable' => ShowAllWalletsController::class,
     'name' => 'wallets.show_all'
 ];
 $routes[] = [
     'method' => 'GET',
     'pattern' => '/wallets/add',
-    'callable' => [\DI\get(WalletController::class), 'showCreateForm'],
+    'callable' => ShowCreateFormWalletController::class,
     'name' => 'wallets.create_form'
 ];
-$routes[] = ['method' => 'GET', 'pattern' => '/wallets/{id}', 'callable' => [\DI\get(WalletController::class), 'show']];
+$routes[] = [
+    'method' => 'GET',
+    'pattern' => '/wallets/{id}',
+    'callable' => ShowWalletController::class,
+    'name' => 'wallet.show'
+];
 $routes[] = [
     'method' => 'POST',
     'pattern' => '/wallets/add',
-    'callable' => [\DI\get(WalletController::class), 'create'],
+    'callable' => CreateWalletController::class,
     'name' => 'wallets.create'
 ];
 $routes[] = [
     'method' => 'PATCH',
     'pattern' => '/wallets/update/{id}',
-    'callable' => [\DI\get(WalletController::class), 'update'],
+    'callable' => UpdateWalletController::class,
     'name' => 'wallets.update'
 ];
 $routes[] = [
     'method' => 'DELETE',
     'pattern' => '/wallets/delete/{id}',
-    'callable' => [\DI\get(WalletController::class), 'delete'],
+    'callable' => DeleteWalletController::class,
     'name' => 'wallets.delete'
 ];

@@ -31,7 +31,7 @@ class ShowAllWalletHtmlPresenter implements ShowAllWalletsPresenter
         $wallets = $response->getWallets();
         foreach ($wallets as $wallet) {
             $type = $this->walletTypeRepository->find($wallet->getType());
-            $this->viewModel->wallets[] = new WalletViewModel($wallet->getName(), $type->getName());
+            $this->viewModel->wallets[] = new WalletViewModel($wallet->getId(), $wallet->getName(), $type->getName());
         }
     }
 

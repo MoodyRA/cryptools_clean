@@ -4,10 +4,12 @@ declare(strict_types = 1);
 
 namespace Cryptools\Presentation\Wallet\Model;
 
-use Cryptools\Domain\Wallet\Entity\Wallet;
-
 class WalletViewModel
 {
+    /**
+     * @var int
+     */
+    public $id;
     /**
      * @var string
      */
@@ -17,18 +19,10 @@ class WalletViewModel
      */
     public $type;
 
-    public function __construct(string $name, string $type)
+    public function __construct(int $id, string $name, string $type)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->type = $type;
-    }
-
-    /**
-     * @param Wallet $wallet
-     * @return WalletViewModel
-     */
-    public static function fromWallet(Wallet $wallet): WalletViewModel
-    {
-        return new self($wallet->getName(), $wallet->getType());
     }
 }

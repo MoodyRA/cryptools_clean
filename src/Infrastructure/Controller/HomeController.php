@@ -23,7 +23,7 @@ class HomeController extends Controller
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function index(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response)
     {
         return $this->view->render($response, 'home.twig');
     }
