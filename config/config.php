@@ -20,5 +20,9 @@ $config = [
 	],
 	'binance_api' => [
 		'test_mode' => false
-	]
+	],
+    'logger' => [
+        'name' => 'cryptools',
+        'file' => ''
+    ]
 ];

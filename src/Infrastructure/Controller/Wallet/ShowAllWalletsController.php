@@ -6,12 +6,13 @@ namespace Cryptools\Infrastructure\Controller\Wallet;
 
 use Cryptools\Domain\Wallet\UseCase\ShowAllWallets\ShowAllWallets;
 use Cryptools\Domain\Wallet\UseCase\ShowAllWallets\ShowAllWalletsRequest;
+use Cryptools\Infrastructure\Controller\Controller;
 use Cryptools\Infrastructure\View\Wallet\ShowAllWalletsView;
 use Cryptools\Presentation\Wallet\ShowAllWalletHtmlPresenter;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class ShowAllWalletsController
+class ShowAllWalletsController extends Controller
 {
     /**
      * @param Request                    $request
