@@ -20,16 +20,12 @@ class DeleteWallet
     }
 
     /**
-     * @param DeleteWalletRequest   $request
-     * @param DeleteWalletPresenter $presenter
+     * @param DeleteWalletRequest $request
      */
-    public function execute(DeleteWalletRequest $request, DeleteWalletPresenter $presenter)
+    public function execute(DeleteWalletRequest $request)
     {
         $response = new DeleteWalletResponse();
         $response->setDeletedWallet($this->walletRepository->find($request->getWalletId()));
         $this->walletRepository->delete($request->getWalletId());
-        $wallets = $this->walletRepository->findAll();
-        $response->setWallets($wallets);
-        $presenter->present($response);
     }
 }

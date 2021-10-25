@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Cryptools\Infrastructure\Controller\Wallet;
 
 use Cryptools\Domain\Wallet\UseCase\ShowAllWallets\ShowAllWallets;
+use Cryptools\Domain\Wallet\UseCase\ShowAllWallets\ShowAllWalletsRequest;
 use Cryptools\Infrastructure\View\Wallet\ShowAllWalletsView;
 use Cryptools\Presentation\Wallet\ShowAllWalletHtmlPresenter;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -13,37 +14,35 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class ShowAllWalletsController
 {
     /**
-     * @var ShowAllWallets
+     * @param Request                    $request
+     * @param Response                   $response
+     * @param ShowAllWallets             $showAllWallets
+     * @param ShowAllWalletHtmlPresenter $showAllWalletsPresenter
+     * @param ShowAllWalletsView         $showAllWalletsView
+     * @return Response
      */
-    private $showAllWallets;
-    /**
-     * @var ShowAllWalletHtmlPresenter
-     */
-    private $showAllWalletsPresenter;
-    /**
-     * @var ShowAllWalletsView
-     */
-    private $showAllWalletsView;
+    public function __invoke(
+        Request $request,
+        Response $response,
 
-    public function __construct(
+        // dependencies
         ShowAllWallets $showAllWallets,
         ShowAllWalletHtmlPresenter $showAllWalletsPresenter,
         ShowAllWalletsView $showAllWalletsView
-    ) {
-        $this->showAllWallets = $showAllWallets;
-        $this->showAllWalletsPresenter = $showAllWalletsPresenter;
-        $this->showAllWalletsView = $showAllWalletsView;
-    }
-
-    /**
-     * @param Request  $request
-     * @param Response $response
-     * @return Response
-     */
-    public function __invoke(Request $request, Response $response): Response
-    {
+    ): Response {
         $queryParams = $request->getQueryParams();
-        $this->showAllWallets->execute($this->showAllWalletsPresenter);
-        return $this->showAllWalletsView->generateView($response, $this->showAllWalletsPresenter->viewModel());
+
+        $showAllWallets->execute($showAllWalletsPresenter);
+        $viewModel = $showAllWalletsPresenter->viewModel();
+        if (
+            !empty($queryParams)
+            && isset($queryParams['from_delete'])
+            && isset($queryParams['deleted_wallet_name'])
+            && $queryParams['from_delete'] === '1'
+        ) {
+            $viewModel->displayDeleteModal = true;
+            $viewModel->deleteModalMessage = "Le portefeuille {$queryParams['deleted_wallet_name']} vient d'être supprimé avec succès";
+        }
+        return $showAllWalletsView->generateView($response, $showAllWalletsPresenter->viewModel());
     }
 }

@@ -31,5 +31,8 @@
         </tbody>
     </table>
     <a href="{{ url_for('wallets.create_form') }}"> Ajouter un nouveau Portefeuille </a>
+    {% if displayDeleteModal == '1' %}
+        <p>{{ deleteModalMessage }}</p>
+    {% endif %}
 
 {% endblock %}

@@ -7,6 +7,7 @@ namespace Cryptools\Infrastructure\Controller\Wallet;
 use Cryptools\Domain\Wallet\UseCase\DeleteWallet\DeleteWallet;
 use Cryptools\Domain\Wallet\UseCase\DeleteWallet\DeleteWalletRequest;
 use Cryptools\Infrastructure\Controller\Controller;
+use Cryptools\Infrastructure\Database\Repository\PDOWalletRepository;
 use Cryptools\Infrastructure\View\Wallet\DeleteWalletView;
 use Cryptools\Presentation\Wallet\DeleteWalletHtmlPresenter;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -52,9 +53,11 @@ class DeleteWalletController extends Controller
         DeleteWalletHtmlPresenter $deleteWalletPresenter,
         DeleteWalletRequest $deleteWalletRequest,
         DeleteWalletView $deleteWalletView,
+        PDOWalletRepository $walletRepository,
         // arguments
         $id
     ): Response {
+        $deletedWallet = $walletRepository->find((int)$id);
         $deleteWallet->execute(
             $deleteWalletRequest->setWalletId((int)$id),
             $deleteWalletPresenter
@@ -62,10 +65,12 @@ class DeleteWalletController extends Controller
         return $response->withRedirect(
             $app->getRouteCollector()->getRouteParser()->urlFor(
                 'wallets.show_all',
-                ['prout' => 'fooo'],
-                ['prout' => 'fooo']
+                [],
+                [
+                    'from_delete' => '1',
+                    'deleted_wallet_name' => $deletedWallet->getName()
+                ]
             )
         );
-        // return $this->deleteWalletView->generateView($response, $this->deleteWalletPresenter->viewModel());
     }
 }
