@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Cryptools\Domain\Entity;
 
@@ -21,15 +21,10 @@ class Wallet
      * @var WalletType
      */
     private WalletType $type;
-
     /**
-     * Cast en int dans le cas ou la classe est instanciée via PDO::fetchObject() qui ne renvoie que des string
+     * @var WalletCryptocurrency[]
      */
-    public function __construct()
-    {
-        $this->id = (int)$this->id;
-        $this->type = (int)$this->type;
-    }
+    private array $cryptocurrencies;
 
     /**
      * @return int
@@ -84,4 +79,24 @@ class Wallet
         $this->type = $type;
         return $this;
     }
+
+    /**
+     * @return WalletCryptocurrency[]
+     */
+    public function getCryptocurrencies(): array
+    {
+        return $this->cryptocurrencies;
+    }
+
+    /**
+     * @param WalletCryptocurrency[] $cryptocurrencies
+     * @return Wallet
+     */
+    public function setCryptocurrencies(array $cryptocurrencies): Wallet
+    {
+        $this->cryptocurrencies = $cryptocurrencies;
+        return $this;
+    }
+
+
 }

@@ -1,25 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Cryptools\Domain\Wallet\Entity;
+namespace Cryptools\Domain\Repository;
+
+use Cryptools\Domain\Entity\Wallet;
 
 /**
  * Permet de modifier un portefeuille dans un système de stockage de données
  */
-interface WalletRepository
+interface WalletRepository extends EntityRepository
 {
-    /**
-     * @param int $walletId
-     * @return Wallet|null
-     */
-    public function find(int $walletId): ?Wallet;
-
-    /**
-     * @return Wallet[]
-     */
-    public function findAll(): array;
-
     /**
      * @param Wallet $wallet
      */
