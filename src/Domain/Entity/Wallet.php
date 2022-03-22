@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Wallet\Entity;
+namespace Cryptools\Domain\Entity;
 
 /**
  * Entité représentant les données d'un portefeuille
@@ -12,15 +12,15 @@ class Wallet
     /**
      * @var int
      */
-    private $id;
+    private int $id;
     /**
      * @var string
      */
-    private $name;
+    private string $name;
     /**
-     * @var int
+     * @var WalletType
      */
-    private $type;
+    private WalletType $type;
 
     /**
      * Cast en int dans le cas ou la classe est instanciée via PDO::fetchObject() qui ne renvoie que des string
@@ -68,18 +68,18 @@ class Wallet
     }
 
     /**
-     * @return int
+     * @return WalletType
      */
-    public function getType(): int
+    public function getType(): WalletType
     {
         return $this->type;
     }
 
     /**
-     * @param int $type
+     * @param WalletType $type
      * @return Wallet
      */
-    public function setType(int $type): Wallet
+    public function setType(WalletType $type): Wallet
     {
         $this->type = $type;
         return $this;

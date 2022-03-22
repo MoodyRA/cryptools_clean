@@ -2,18 +2,25 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Wallet\Entity;
+namespace Cryptools\Domain\Entity;
 
+/**
+ * représente le type d'un portfeuille.
+ * exemple :
+ * - portefeuille alimenté manuellement
+ * - portefeuille récupéré via une API
+ * - ...
+ */
 class WalletType
 {
     /**
      * @var int
      */
-    private $id;
+    private int $id;
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @return int
