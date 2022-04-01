@@ -6,6 +6,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Views\TwigMiddleware;
 
+include_once __DIR__ . '/../scripts/updateBinanceTrades.php';
+die();
+
 require __DIR__ . '/../vendor/autoload.php';
 
 try {

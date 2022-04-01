@@ -18,10 +18,6 @@ class Wallet
      */
     private string $name;
     /**
-     * @var WalletType
-     */
-    private WalletType $type;
-    /**
      * @var WalletCryptocurrency[]
      */
     private array $cryptocurrencies;
@@ -63,24 +59,6 @@ class Wallet
     }
 
     /**
-     * @return WalletType
-     */
-    public function getType(): WalletType
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param WalletType $type
-     * @return Wallet
-     */
-    public function setType(WalletType $type): Wallet
-    {
-        $this->type = $type;
-        return $this;
-    }
-
-    /**
      * @return WalletCryptocurrency[]
      */
     public function getCryptocurrencies(): array
@@ -97,6 +75,4 @@ class Wallet
         $this->cryptocurrencies = $cryptocurrencies;
         return $this;
     }
-
-
 }
