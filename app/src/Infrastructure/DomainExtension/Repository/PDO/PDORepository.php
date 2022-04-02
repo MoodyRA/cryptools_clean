@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cryptools\Infrastructure\Repository\PDO;
+namespace Cryptools\Infrastructure\DomainExtension\Repository\PDO;
 
 use PDO;
 

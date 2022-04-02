@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Cryptools\Domain\Wallet\UseCase\ShowAllWallets;
 
-interface ShowAllWalletsPresenter
+interface howAllWalletsPresenter
 {
     /**
      * @param ShowAllWalletsResponse $response
