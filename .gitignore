@@ -1,4 +1,5 @@
 .idea
 vendor
 logs/*
-.env
+docker/.env
+public/ca.pem
