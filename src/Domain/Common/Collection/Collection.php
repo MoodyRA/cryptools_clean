@@ -58,6 +58,13 @@ interface Collection extends \IteratorAggregate
     public function keys(): array;
 
     /**
+     * Return true if the Collection is empty, false else.
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool;
+
+    /**
      * Return the number of items.
      *
      * @return int
@@ -106,5 +113,5 @@ interface Collection extends \IteratorAggregate
      *
      * @return Collection
      */
-    public function __clone();
+    public function __clone(): Collection;
 }

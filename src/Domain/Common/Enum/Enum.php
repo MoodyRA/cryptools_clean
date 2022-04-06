@@ -50,15 +50,6 @@ interface Enum
     public function getValue(): mixed;
 
     /**
-     * Returns TRUE if it equals $enum.
-     *
-     * @param Enum $enum
-     *
-     * @return bool
-     */
-    public function equals(Enum $enum): bool;
-
-    /**
      * Returns the enum value as string
      *
      * @return string

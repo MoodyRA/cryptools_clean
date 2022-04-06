@@ -73,6 +73,14 @@ class ArrayCollection implements Collection
     /**
      * {@inheritDoc}
      */
+    public function isEmpty(): bool
+    {
+        return empty($this->items);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function length(): int
     {
         return count($this->items);
@@ -132,7 +140,7 @@ class ArrayCollection implements Collection
     /**
      * {@inheritDoc}
      */
-    public function __clone()
+    public function __clone(): Collection
     {
         $this->cloneArray($this->items);
     }

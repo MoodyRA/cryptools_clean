@@ -66,11 +66,6 @@ abstract class ReflectionEnum implements Enum
     /**
      * {@inheritDoc}
      */
-    abstract public function equals(Enum $enum): bool;
-
-    /**
-     * {@inheritDoc}
-     */
     #[Pure] public function __toString(): string
     {
         return (string) $this->getValue();
