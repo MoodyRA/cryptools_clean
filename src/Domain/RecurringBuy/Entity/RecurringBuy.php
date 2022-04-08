@@ -1,30 +1,32 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Cryptools\Domain\RecurringBuy\Entity;
 
+use Cryptools\Domain\Common\ValueObject\Date;
+use Cryptools\Domain\Common\ValueObject\Time;
 use Cryptools\Domain\Currency\Entity\Pair;
 
 class RecurringBuy
 {
-    /** @var int  */
+    /** @var int */
     protected int $id;
-    /** @var Pair  */
+    /** @var Pair */
     protected Pair $pair;
-    /** @var string  */
-    protected string $startDate;
-    /** @var string  */
-    protected string $endDate;
-    /** @var string  */
-    protected string $time;
-    /** @var int  */
+    /** @var Date */
+    protected Date $startDate;
+    /** @var Date */
+    protected Date $endDate;
+    /** @var Time */
+    protected Time $time;
+    /** @var int */
     protected int $recurrence;
-    /** @var \DateTime  */
+    /** @var \DateTime */
     protected \DateTime $lastExecution;
-    /** @var bool  */
+    /** @var bool */
     protected bool $active;
-    /** @var float  */
+    /** @var float */
     protected float $amount;
 
     /**
@@ -64,54 +66,54 @@ class RecurringBuy
     }
 
     /**
-     * @return string
+     * @return Date
      */
-    public function getStartDate(): string
+    public function getStartDate(): Date
     {
         return $this->startDate;
     }
 
     /**
-     * @param string $startDate
+     * @param Date $startDate
      * @return RecurringBuy
      */
-    public function setStartDate(string $startDate): RecurringBuy
+    public function setStartDate(Date $startDate): RecurringBuy
     {
         $this->startDate = $startDate;
         return $this;
     }
 
     /**
-     * @return string
+     * @return Date
      */
-    public function getEndDate(): string
+    public function getEndDate(): Date
     {
         return $this->endDate;
     }
 
     /**
-     * @param string $endDate
+     * @param Date $endDate
      * @return RecurringBuy
      */
-    public function setEndDate(string $endDate): RecurringBuy
+    public function setEndDate(Date $endDate): RecurringBuy
     {
         $this->endDate = $endDate;
         return $this;
     }
 
     /**
-     * @return string
+     * @return Time
      */
-    public function getTime(): string
+    public function getTime(): Time
     {
         return $this->time;
     }
 
     /**
-     * @param string $time
+     * @param Time $time
      * @return RecurringBuy
      */
-    public function setTime(string $time): RecurringBuy
+    public function setTime(Time $time): RecurringBuy
     {
         $this->time = $time;
         return $this;
