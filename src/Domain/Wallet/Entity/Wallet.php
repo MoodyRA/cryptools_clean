@@ -5,23 +5,20 @@ declare(strict_types = 1);
 namespace Cryptools\Domain\Wallet\Entity;
 
 use Cryptools\Domain\Wallet\Collection\WalletCryptocurrencyCollection;
+use Cryptools\Domain\Wallet\Enum\WalletType;
 
 /**
  * Entité représentant les données d'un portefeuille
  */
 class Wallet
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private int $id;
-    /**
-     * @var string
-     */
+    /** @var string */
     private string $name;
-    /**
-     * @var WalletCryptocurrencyCollection
-     */
+    /** @var WalletType */
+    private WalletType $type;
+    /** @var WalletCryptocurrencyCollection */
     private WalletCryptocurrencyCollection $cryptocurrencies;
 
     /**
@@ -57,6 +54,24 @@ class Wallet
     public function setName(string $name): Wallet
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return WalletType
+     */
+    public function getType(): WalletType
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param WalletType $type
+     * @return Wallet
+     */
+    public function setType(WalletType $type): Wallet
+    {
+        $this->type = $type;
         return $this;
     }
 
