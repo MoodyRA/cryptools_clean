@@ -111,7 +111,6 @@ interface Collection extends \IteratorAggregate
      * Return a new cloned object
      * It's recommended to deep clone the object
      *
-     * @return Collection
      */
-    public function __clone(): Collection;
+    public function __clone();
 }

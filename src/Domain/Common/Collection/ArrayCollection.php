@@ -140,7 +140,7 @@ class ArrayCollection implements Collection
     /**
      * {@inheritDoc}
      */
-    public function __clone(): Collection
+    public function __clone()
     {
         $this->cloneArray($this->items);
     }
