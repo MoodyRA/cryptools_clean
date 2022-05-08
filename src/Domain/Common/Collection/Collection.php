@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cryptools\Domain\Common\Collection;
+namespace App\Domain\Common\Collection;
 
 interface Collection extends \IteratorAggregate
 {

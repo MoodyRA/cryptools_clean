@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Wallet\Entity;
+namespace App\Domain\Wallet\Entity;
 
-use Cryptools\Domain\Wallet\Collection\WalletCryptocurrencyCollection;
-use Cryptools\Domain\Wallet\Enum\WalletType;
+use App\Domain\Wallet\Collection\WalletCryptocurrencyCollection;
+use App\Domain\Wallet\Enum\WalletType;
 
 /**
  * Entité représentant les données d'un portefeuille

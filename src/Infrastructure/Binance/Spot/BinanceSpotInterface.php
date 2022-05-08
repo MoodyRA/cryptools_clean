@@ -1,11 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Cryptools\Infrastructure\Binance\Spot;
+namespace App\Infrastructure\Binance\Spot;
 
-use Cryptools\Domain\Currency\Entity\Pair;
-use Cryptools\Domain\Wallet\Collection\TradeCollection;
+use App\Domain\Currency\Collection\PairCollection;
+use App\Domain\Currency\Entity\Pair;
+use App\Domain\Wallet\Collection\TradeCollection;
 
 interface BinanceSpotInterface
 {
@@ -23,4 +24,11 @@ interface BinanceSpotInterface
      * @return TradeCollection
      */
     public function allTrades(): TradeCollection;
+
+    /**
+     * Returns all pairs available on Binance
+     *
+     * @return PairCollection
+     */
+    public function allPairs(): PairCollection;
 }

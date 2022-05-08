@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\RecurringBuy\Entity;
+namespace App\Domain\RecurringBuy\Entity;
 
-use Cryptools\Domain\Common\ValueObject\Date;
-use Cryptools\Domain\Common\ValueObject\Time;
-use Cryptools\Domain\Currency\Entity\Pair;
+use App\Domain\Common\ValueObject\Date;
+use App\Domain\Common\ValueObject\Time;
+use App\Domain\Currency\Entity\Pair;
 
 class RecurringBuy
 {

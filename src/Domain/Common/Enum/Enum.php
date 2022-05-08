@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cryptools\Domain\Common\Enum;
+namespace App\Domain\Common\Enum;
 
 use InvalidArgumentException;
 

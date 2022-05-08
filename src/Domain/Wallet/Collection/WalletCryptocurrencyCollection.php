@@ -1,10 +1,10 @@
 <?php
 
-namespace Cryptools\Domain\Wallet\Collection;
+namespace App\Domain\Wallet\Collection;
 
 
-use Cryptools\Domain\Common\Collection\ArrayCollection;
-use Cryptools\Domain\Wallet\Entity\WalletCryptocurrency;
+use App\Domain\Common\Collection\ArrayCollection;
+use App\Domain\Wallet\Entity\WalletCryptocurrency;
 use InvalidArgumentException;
 
 final class WalletCryptocurrencyCollection extends ArrayCollection

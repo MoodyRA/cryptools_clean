@@ -1,9 +1,9 @@
 <?php
 
-namespace Cryptools\Domain\Wallet\Collection;
+namespace App\Domain\Wallet\Collection;
 
-use Cryptools\Domain\Common\Collection\ArrayCollection;
-use Cryptools\Domain\Wallet\Entity\Trade;
+use App\Domain\Common\Collection\ArrayCollection;
+use App\Domain\Wallet\Entity\Trade;
 use InvalidArgumentException;
 
 final class TradeCollection extends ArrayCollection

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Binance\Entity;
+namespace App\Domain\Binance\Entity;
 
 class BinanceApiAccount
 {

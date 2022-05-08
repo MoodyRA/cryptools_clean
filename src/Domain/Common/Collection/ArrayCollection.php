@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Cryptools\Domain\Common\Collection;
+namespace App\Domain\Common\Collection;
 
-use Cryptools\Domain\Common\Trait\CloneArrayTrait;
+use App\Domain\Common\Trait\CloneArrayTrait;
+use Traversable;
 
 class ArrayCollection implements Collection
 {
@@ -146,9 +147,9 @@ class ArrayCollection implements Collection
     }
 
     /**
-     * {@inheritDoc}
+     * @return Traversable
      */
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
         foreach ($this->items as $key => $item) {
             yield $key => $item;

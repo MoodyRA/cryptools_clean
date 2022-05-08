@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cryptools\Domain\Common\Trait;
+namespace App\Domain\Common\Trait;
 
 trait CloneArrayTrait
 {

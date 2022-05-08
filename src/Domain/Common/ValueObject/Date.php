@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Common\ValueObject;
+namespace App\Domain\Common\ValueObject;
 
 class Date
 {

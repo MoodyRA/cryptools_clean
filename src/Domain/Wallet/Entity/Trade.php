@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Wallet\Entity;
+namespace App\Domain\Wallet\Entity;
 
-use Cryptools\Domain\Currency\Entity\Pair;
-use Cryptools\Domain\Wallet\Enum\TradeType;
+use App\Domain\Currency\Entity\Pair;
+use App\Domain\Wallet\Enum\TradeType;
 use DateTime;
 
 class Trade

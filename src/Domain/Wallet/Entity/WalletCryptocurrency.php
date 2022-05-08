@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Wallet\Entity;
+namespace App\Domain\Wallet\Entity;
 
-use Cryptools\Domain\Currency\Entity\Cryptocurrency;
+use App\Domain\Currency\Entity\Cryptocurrency;
 
 class WalletCryptocurrency extends Cryptocurrency
 {

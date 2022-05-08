@@ -1,9 +1,9 @@
 <?php
 
-namespace Cryptools\Domain\Currency\Collection;
+namespace App\Domain\Currency\Collection;
 
-use Cryptools\Domain\Common\Collection\ArrayCollection;
-use Cryptools\Domain\Currency\Entity\Pair;
+use App\Domain\Common\Collection\ArrayCollection;
+use App\Domain\Currency\Entity\Pair;
 use InvalidArgumentException;
 
 final class PairCollection extends ArrayCollection
@@ -28,7 +28,6 @@ final class PairCollection extends ArrayCollection
 
     /**
      * @return array
-     * @throws \Exception
      */
     public function toArrayByBaseCurrencySymbol(): array
     {

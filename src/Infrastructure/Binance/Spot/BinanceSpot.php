@@ -1,19 +1,20 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-namespace Cryptools\Infrastructure\Binance\Spot;
+namespace App\Infrastructure\Binance\Spot;
 
 use Binance\API as BinanceApi;
-use Cryptools\Domain\Binance\Entity\BinanceApiAccount;
-use Cryptools\Domain\Currency\Collection\PairCollection;
-use Cryptools\Domain\Currency\Entity\Cryptocurrency;
-use Cryptools\Domain\Currency\Entity\Pair;
-use Cryptools\Domain\Wallet\Collection\TradeCollection;
-use Cryptools\Domain\Wallet\Collection\WalletCryptocurrencyCollection;
-use Cryptools\Domain\Wallet\Entity\Trade;
-use Cryptools\Domain\Wallet\Entity\WalletCryptocurrency;
-use Cryptools\Domain\Wallet\Enum\TradeType;
+use App\Domain\Binance\Entity\BinanceApiAccount;
+use App\Domain\Currency\Collection\PairCollection;
+use App\Domain\Currency\Entity\Cryptocurrency;
+use App\Domain\Currency\Entity\Pair;
+use App\Domain\Wallet\Collection\TradeCollection;
+use App\Domain\Wallet\Collection\WalletCryptocurrencyCollection;
+use App\Domain\Wallet\Entity\Trade;
+use App\Domain\Wallet\Entity\WalletCryptocurrency;
+use App\Domain\Wallet\Enum\TradeType;
+use App\Infrastructure\Exception\BinanceException;
 
 class BinanceSpot implements BinanceSpotInterface
 {
@@ -22,8 +23,9 @@ class BinanceSpot implements BinanceSpotInterface
 
     /**
      * @param BinanceApiAccount $account
-     * @param bool              $useTest
+     * @param bool $useTest
      * @return BinanceSpot
+     * @throws BinanceException
      */
     public static function create(BinanceApiAccount $account, bool $useTest = true): BinanceSpotInterface
     {
@@ -38,6 +40,7 @@ class BinanceSpot implements BinanceSpotInterface
 
     /**
      * @param BinanceApi $binanceApi
+     * @throws BinanceException
      */
     public function __construct(BinanceApi $binanceApi)
     {
@@ -45,18 +48,18 @@ class BinanceSpot implements BinanceSpotInterface
             $this->binanceApi = $binanceApi;
             $this->binanceApi->useServerTime();
         } catch (\Exception $e) {
-            // todo : to handle later
+            throw new BinanceException("Error while getting Binance server time", 0, $e);
         }
     }
 
     /**
      * @param Pair $pair
      * @return TradeCollection
+     * @throws BinanceException
      */
     public function trades(Pair $pair): TradeCollection
     {
         try {
-            $this->beforeDoingRequest();
             $entries = $this->binanceApi->history(
                 $pair->getBaseCurrency()->getSymbol() . $pair->getQuoteCurrency()->getSymbol()
             );
@@ -75,12 +78,13 @@ class BinanceSpot implements BinanceSpotInterface
             }
             return new TradeCollection($trades);
         } catch (\Exception $e) {
+            throw new BinanceException("Error while getting trades from a symbol", 0, $e);
         }
     }
 
     /**
      * @return TradeCollection
-     * @throws \Exception
+     * @throws BinanceException
      */
     public function tradesFromOwnedCurrencies(): TradeCollection
     {
@@ -100,28 +104,32 @@ class BinanceSpot implements BinanceSpotInterface
 
     /**
      * @return TradeCollection
-     * @throws \Exception
+     * @throws BinanceException
      */
     public function allTrades(): TradeCollection
     {
         $pairs = $this->allPairs();
         $trades = new TradeCollection([]);
-        /** @var Pair $pair */
-        foreach ($pairs->getIterator() as $pair) {
-            $trades = $trades->mergeWith($this->trades($pair));
+        try {
+            /** @var Pair $pair */
+            foreach ($pairs->getIterator() as $pair) {
+                $trades = $trades->mergeWith($this->trades($pair));
+            }
+        } catch (\Exception $e) {
+            throw new BinanceException("Error while iterating pairs for getting all trades", 0, $e);
         }
+
         return $trades;
     }
 
     /**
      * @return WalletCryptocurrencyCollection
+     * @throws BinanceException
      */
     public function ownedCryptocurrencies(): WalletCryptocurrencyCollection
     {
         try {
-            $this->beforeDoingRequest();
             $prices = $this->binanceApi->prices();
-            $this->beforeDoingRequest();
             $balances = $this->binanceApi->balances($prices);
 
             $cryptocurrencies = [];
@@ -136,16 +144,17 @@ class BinanceSpot implements BinanceSpotInterface
             }
             return new WalletCryptocurrencyCollection($cryptocurrencies);
         } catch (\Exception $e) {
+            throw new BinanceException("Error while getting owned cryptocurrencies", 0, $e);
         }
     }
 
     /**
      * @return PairCollection
+     * @throws BinanceException
      */
     public function allPairs(): PairCollection
     {
         try {
-            $this->beforeDoingRequest();
             $infos = $this->binanceApi->exchangeInfo();
             $pairs = [];
             foreach ($infos['symbols'] as $symbol) {
@@ -158,18 +167,7 @@ class BinanceSpot implements BinanceSpotInterface
             }
             return new PairCollection($pairs);
         } catch (\Exception $e) {
-        }
-    }
-
-    /**
-     * L'api binance n'accepte pas plus de 1200 requêtes par minute, on patiente donc si on arrive à la limite
-     * @return void
-     */
-    private function beforeDoingRequest()
-    {
-        $transfered = $this->binanceApi->getTransfered();
-        if (($this->binanceApi->getRequestCount() % 1150) === 0) {
-            sleep(60);
+            throw new BinanceException("Error while getting all available pairs", 0, $e);
         }
     }
 }

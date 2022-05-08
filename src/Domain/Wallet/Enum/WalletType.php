@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Cryptools\Domain\Wallet\Enum;
+namespace App\Domain\Wallet\Enum;
 
-use Cryptools\Domain\Common\Enum\ReflectionEnum;
+use App\Domain\Common\Enum\ReflectionEnum;
 
 class WalletType extends ReflectionEnum
 {

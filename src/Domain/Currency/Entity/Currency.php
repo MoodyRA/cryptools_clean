@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cryptools\Domain\Currency\Entity;
+namespace App\Domain\Currency\Entity;
 
 class Currency
 {
