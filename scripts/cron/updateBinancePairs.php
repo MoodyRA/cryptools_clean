@@ -2,22 +2,24 @@
 
 use App\Command\UpdateBinancePairsCommand;
 use App\Infrastructure\Binance\Spot\BinanceSpot;
-use App\Infrastructure\Repository\DoctrineDBAL\DBALConnectionParameters;
-use App\Infrastructure\Repository\Binance\DBALBinanceApiAccountRepository;
-use App\Infrastructure\Repository\Pair\DBALBinancePairsRepository;
+use App\Infrastructure\Database\Connection\DoctrineDbal\DbalConnection;
+use App\Infrastructure\Database\Connection\DoctrineDbal\DbalConnectionParameters;
+use App\Infrastructure\Repository\DoctrineDbal\Binance\DbalBinanceApiAccountRepository;
+use App\Infrastructure\Repository\DoctrineDbal\Pair\DbalBinancePairsRepository;
 
 
-$connectionParameters = new DBALConnectionParameters();
+$connectionParameters = new DbalConnectionParameters();
 $connectionParameters->setHost('db')
     ->setDatabaseName('cryptools')
     ->setUser('cryptools')
     ->setPassword('cryptools')
-    ->setDriver(DBALConnectionParameters::DRIVER_MYSQL);
-$binanceAccountRepository = DBALBinanceApiAccountRepository::createFromParameters($connectionParameters);
+    ->setDriver(DbalConnectionParameters::DRIVER_MYSQL);
+$connection = DbalConnection::createFromParameters($connectionParameters);
+$binanceAccountRepository = new DbalBinanceApiAccountRepository($connection);
 $binanceAccount = $binanceAccountRepository->find(1);
 $binanceSpot = BinanceSpot::create($binanceAccount, false);
 $command = new UpdateBinancePairsCommand(
     $binanceSpot,
-    DBALBinancePairsRepository::createFromParameters($connectionParameters)
+   new DbalBinancePairsRepository($connection)
 );
 $command->execute();
